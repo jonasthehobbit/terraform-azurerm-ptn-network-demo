@@ -19,10 +19,10 @@ module "vnet" {
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
 
-  address_space = ["10.0.0.0/16"]
+  address_space = var.vnet_address_spaces
 }
 resource "azurerm_subnet" "default" {
-  for_each             = var.subnets
+  for_each             = var.subnet_address_spaces
   name                 = each.value.name
   resource_group_name  = azurerm_resource_group.main.name
   virtual_network_name = module.vnet.name

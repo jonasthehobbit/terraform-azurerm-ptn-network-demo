@@ -1,5 +1,6 @@
 location = "uksouth"
-subnets = {
+vnet_address_spaces = ["10.0.0.0/16"]
+subnet_address_spaces = {
   "shared_data" = {
     name             = "shared_data"
     address_prefixes = ["10.0.0.0/24"]
