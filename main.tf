@@ -2,6 +2,7 @@
 module "naming" {
   source  = "Azure/naming/azurerm"
   version = "~> 0.3"
+  prefix  = "mmu-demo"
 }
 
 # This is required for resource modules
