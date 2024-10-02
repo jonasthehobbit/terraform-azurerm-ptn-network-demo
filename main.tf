@@ -21,3 +21,10 @@ module "vnet" {
 
   address_space = ["10.0.0.0/16"]
 }
+resource "azurerm_subnet" "default" {
+  for_each             = var.subnets
+  name                 = each.value.name
+  resource_group_name  = azurerm_resource_group.main.name
+  virtual_network_name = module.vnet.virtual_network_name
+  address_prefixes     = each.value.address_prefixes
+}
