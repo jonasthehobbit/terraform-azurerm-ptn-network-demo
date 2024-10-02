@@ -6,7 +6,7 @@ module "naming" {
 }
 
 # This is required for resource modules
-resource "azurerm_resource_group" "this" {
+resource "azurerm_resource_group" "main" {
   location = module.regions.regions[random_integer.region_index.result].name
   name     = module.naming.resource_group.name_unique
 }
@@ -17,8 +17,8 @@ module "vnet" {
   version             = "0.4.0"
   name                = module.naming.virtual_network.name
   enable_telemetry    = true
-  resource_group_name = azurerm_resource_group.this.name
-  location            = azurerm_resource_group.this.location
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
 
   address_space = ["10.0.0.0/16"]
 }
