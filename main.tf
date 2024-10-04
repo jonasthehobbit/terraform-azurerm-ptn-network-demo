@@ -32,7 +32,7 @@ module "vnet" {
 resource "azurerm_subnet" "default" {
   for_each             = var.subnet_address_spaces
   name                 = each.value.name
-  resource_group_name  = azurerm_resource_group.main.name
+  resource_group_name  = module.avm-res-resources-resourcegroup.name
   virtual_network_name = module.vnet.name
   address_prefixes     = each.value.address_prefixes
 }
