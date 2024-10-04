@@ -6,9 +6,17 @@ module "naming" {
 }
 
 # This is required for resource modules
-resource "azurerm_resource_group" "main" {
+
+module "avm-res-resources-resourcegroup" {
+  source  = "Azure/avm-res-resources-resourcegroup/azurerm"
+  version = "0.1.0"
+  # insert the 2 required variables here
   location = var.location
   name     = module.naming.resource_group.name_unique
+  tags = {
+    environment = "dev"
+    owner       = "terraform"
+  }
 }
 
 # Creating a virtual network with a unique name, telemetry settings, and in the specified resource group and location.
@@ -16,8 +24,8 @@ module "vnet" {
   source              = "Azure/avm-res-network-virtualnetwork/azurerm"
   version             = "0.4.0"
   name                = module.naming.virtual_network.name_unique
-  resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
+  resource_group_name = module.avm-res-resources-resourcegroup.name
+  location            = var.location
 
   address_space = var.vnet_address_spaces
 }
