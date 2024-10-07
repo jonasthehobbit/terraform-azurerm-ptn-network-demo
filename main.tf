@@ -14,7 +14,7 @@ module "avm-res-resources-resourcegroup" {
   location = var.location
   name     = module.naming.resource_group.name_unique
   tags = {
-    Environment = "dev"
+    environment = "dev"
     Owner       = "terraform"
   }
 }
