@@ -15,7 +15,8 @@ module "avm-res-resources-resourcegroup" {
   name     = module.naming.resource_group.name_unique
   tags = {
     environment = "dev"
-    Owner       = "terraform"
+    owner       = "terraform"
+    code        = "mmu-demo"
   }
 }
 
