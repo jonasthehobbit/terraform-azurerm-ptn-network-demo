@@ -16,7 +16,6 @@ module "avm-res-resources-resourcegroup" {
   tags = {
     environment = "dev"
     owner       = "terraform"
-    code        = "mmu-demo"
   }
 }
 
