@@ -1,4 +1,4 @@
-location = "uksouth"
+location            = "uksouth"
 vnet_address_spaces = ["10.0.0.0/16"]
 subnet_address_spaces = {
   "shared_data" = {
@@ -9,4 +9,9 @@ subnet_address_spaces = {
     name             = "shared_compute"
     address_prefixes = ["10.0.1.0/24"]
   }
+}
+tags = {
+  costcode    = "123456"
+  owner       = "terraform"
+  environment = "dev"
 }

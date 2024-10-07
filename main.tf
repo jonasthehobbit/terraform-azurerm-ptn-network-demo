@@ -13,10 +13,7 @@ module "avm-res-resources-resourcegroup" {
   # insert the 2 required variables here
   location = var.location
   name     = module.naming.resource_group.name_unique
-  tags = {
-    environment = "dev"
-    owner       = "terraform"
-  }
+  tags     = var.tags
 }
 
 # Creating a virtual network with a unique name, telemetry settings, and in the specified resource group and location.
