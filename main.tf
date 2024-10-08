@@ -49,5 +49,5 @@ module "avm-res-network-networksecuritygroup" {
 resource "azurerm_subnet_network_security_group_association" "defaults" {
   for_each                  = var.subnet_address_spaces
   subnet_id                 = azurerm_subnet.defaults[each.key].id
-  network_security_group_id = module.avm-res-network-networksecuritygroup.id
+  network_security_group_id = module.avm-res-network-networksecuritygroup.resource_id
 }
