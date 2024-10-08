@@ -20,7 +20,7 @@ variable "tags" {
 }
 variable "network_security_group_rules" {
   description = "A map of network security group rules to create."
-  type = map(optional(object({
+  type = map(object({
     name                       = string
     priority                   = number
     direction                  = string
@@ -30,6 +30,6 @@ variable "network_security_group_rules" {
     destination_port_range     = string
     source_address_prefix      = string
     destination_address_prefix = string
-  })), {})
+  }))
   default = {}
 }
