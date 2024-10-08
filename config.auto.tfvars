@@ -27,15 +27,4 @@ network_security_group_rules = {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-  allow_all_22 = {
-    name                       = "default_deny"
-    priority                   = 4000
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
 }
