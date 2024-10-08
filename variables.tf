@@ -14,9 +14,16 @@ variable "subnet_address_spaces" {
     address_prefixes = list(string)
   }))
 }
+variable "required_tags" {
+  type = object({
+    environment = optional(string, "dev")
+    costcenter  = optional(string, "702200")
+    owner       = optional(string, "IT Team")
+  })
+}
 variable "tags" {
-  description = "A map of tags to add to all resources in this example."
-  type        = map(string)
+  type = map(string)
+  default = {}  
 }
 variable "network_security_group_rules" {
   description = "A map of network security group rules to create."

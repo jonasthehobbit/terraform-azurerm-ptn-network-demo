@@ -1,15 +1,29 @@
 package terraform.azure.nsg
 
-# List of ports that should not have "any" source and destination rules
-restricted_ports = [22, 3389, 80, 443]
-import input.plan as tfplan
 import rego.v1
 
-# Rule to check for Azure Network Security Groups and ensure they do not have risky rules
+# List of ports that should not have "any" source and destination rules
+plan_actions := {"create", "update", "change"}
+restricted_ports := {22, 3389, 80, 443}
+
+msg_text := "Security rule with source and destination as '*' should not use restricted ports: %v"
+
+# Rule to check for Azure Resource Groups and ensure they have tags
 deny contains msg if {
-    resource := tfplan.resource_changes[_]
-    resource.type == "azurerm_network_security_group"
-    risky_rules_found := {rule | rule := resource.change.after.security_rules[_]; rule.access == "Allow" and rule.source_address_prefix == "*" and rule.destination_address_prefix == "*" and rule.destination_port_range in restricted_ports}
-    count(risky_rules_found) > 0
-    msg := sprintf("Network Security Group has risky rules for restricted ports: %v", [risky_rules_found])
+	some resource in input.plan.resource_changes
+    resource.action in plan_actions
+	resource.type == "azurerm_network_security_group"
+    some rule in resource.change.after
+    rule.source_address_prefix == "*"
+	
+	# some change in resources.change.after
+	1 = 1
+
+	# 	some change in resources.change.after
+	# 	resources
+	# 		rule := resource.change.after[_]
+	# 		rule.source_address_prefix == "*"
+	# 		rule.destination_address_prefix == "*"
+	# 	change.source_port_range in restricted_ports
+	msg := resource
 }

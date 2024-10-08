@@ -13,7 +13,7 @@ module "avm-res-resources-resourcegroup" {
   # insert the 2 required variables here
   location = var.location
   name     = module.naming.resource_group.name_unique
-  tags     = var.tags
+  tags     = merge(var.tags,var.required_tags)
 }
 
 # Creating a virtual network with a unique name, telemetry settings, and in the specified resource group and location.
@@ -23,9 +23,7 @@ module "vnet" {
   name                = module.naming.virtual_network.name_unique
   resource_group_name = module.avm-res-resources-resourcegroup.name
   location            = var.location
-
   address_space = var.vnet_address_spaces
-
 }
 resource "azurerm_subnet" "defaults" {
   for_each             = var.subnet_address_spaces
