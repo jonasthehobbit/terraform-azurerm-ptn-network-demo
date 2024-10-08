@@ -27,11 +27,11 @@ network_security_group_rules = {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-  allow_all_outbound = {
-    name                       = "allow_all_outbound"
-    priority                   = 3000
-    direction                  = "Outbound"
-    access                     = "Allow"
+  allow_all_22 = {
+    name                       = "default_deny"
+    priority                   = 4000
+    direction                  = "Inbound"
+    access                     = "allow"
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "22"
