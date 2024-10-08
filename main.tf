@@ -25,11 +25,30 @@ module "vnet" {
   location            = var.location
 
   address_space = var.vnet_address_spaces
+
 }
-resource "azurerm_subnet" "default" {
+resource "azurerm_subnet" "defaults" {
   for_each             = var.subnet_address_spaces
   name                 = each.value.name
   resource_group_name  = module.avm-res-resources-resourcegroup.name
   virtual_network_name = module.vnet.name
   address_prefixes     = each.value.address_prefixes
+}
+
+module "avm-res-network-networksecuritygroup" {
+  for_each = var.subnet_address_spaces
+  source   = "Azure/avm-res-network-networksecuritygroup/azurerm"
+  version  = "0.2.0"
+  # insert the 3 required variables here
+  resource_group_name = module.avm-res-resources-resourcegroup.name
+  location            = var.location
+  name                = module.naming.network_security_group.name_unique
+  tags                = var.tags
+  security_rules      = var.network_security_group_rules
+
+}
+resource "azurerm_subnet_network_security_group_association" "defaults" {
+  for_each                  = var.subnet_address_spaces
+  subnet_id                 = resource.azurerm_subnet.default[each.key].id
+  network_security_group_id = module.avm-res-network-networksecuritygroup[each.key].id
 }

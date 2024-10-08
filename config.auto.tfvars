@@ -15,3 +15,16 @@ tags = {
   owner       = "terraform"
   environment = "dev"
 }
+network_security_group_rules = {
+  default_deny = {
+    name                       = "default_deny"
+    priority                   = 4000
+    direction                  = "Inbound"
+    access                     = "Deny"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
