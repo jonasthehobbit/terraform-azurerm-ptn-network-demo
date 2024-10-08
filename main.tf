@@ -7,7 +7,7 @@ module "naming" {
 
 # Create resource group using AVM module
 module "resourcegroup" {
-  source  = "Azure/resourcegroup/azurerm"
+  source  = "Azure/avm-res-resources-resourcegroup/azurerm"
   version = "0.1.0"
   # insert the 2 required variables here
   location = var.location
