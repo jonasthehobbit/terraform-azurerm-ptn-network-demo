@@ -32,9 +32,9 @@ network_security_group_rules = {
     priority                   = 3000
     direction                  = "Outbound"
     access                     = "Allow"
-    protocol                   = "22"
+    protocol                   = "*"
     source_port_range          = "*"
-    destination_port_range     = "*"
+    destination_port_range     = "22"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
