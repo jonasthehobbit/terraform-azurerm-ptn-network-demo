@@ -1,14 +1,18 @@
 package terraform.azure.tags
 
-tags = ["environment", "owner", "costcode"]
 import input.plan as tfplan
 import rego.v1
-
-# Rule to check for Azure Resource Groups and ensure they have tags
+# filters for the plan actions
+tags := {"environment", "owner", "costcode"}
+resource_types = {"azurerm_resource_group"}
+actions = {"create", "update"}
+# Rule to check for Azure Resources and ensure they have the listed tags
 deny contains msg if {
-	resource := tfplan.resource_changes[_]
-	resource.type == "azurerm_resource_group"
+	some resource in tfplan.resource_changes
+    address := resource.address
+	resource.type in resource_types
+    resource.change.actions[_] in actions
 	missing_tags := {tag | tag := tags[_]; not resource.change.after.tags[tag]}
 	count(missing_tags) > 0
-	msg := sprintf("Resource group is missing the following tags: %v", [missing_tags])
+	msg := sprintf("%s is missing the following tags: %v", [address, missing_tags])
 }

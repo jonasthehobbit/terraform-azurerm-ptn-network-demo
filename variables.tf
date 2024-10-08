@@ -14,16 +14,14 @@ variable "subnet_address_spaces" {
     address_prefixes = list(string)
   }))
 }
-variable "required_tags" {
-  type = object({
-    environment = optional(string, "dev")
-    costcenter  = optional(string, "702200")
-    owner       = optional(string, "IT Team")
-  })
-}
 variable "tags" {
-  type = map(string)
-  default = {}  
+  description = "A map of tags to add to all resources in this example."
+  type        = map(string)
+  default     = {
+    costcode    = "123456"
+    owner       = "terraform"
+    environment = "dev"
+  }
 }
 variable "network_security_group_rules" {
   description = "A map of network security group rules to create."
@@ -38,5 +36,17 @@ variable "network_security_group_rules" {
     source_address_prefix      = string
     destination_address_prefix = string
   }))
-  default = {}
+  default = {
+    default_deny = {
+      name                       = "default_deny"
+      priority                   = 4000
+      direction                  = "Inbound"
+      access                     = "Deny"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+  }
 }
