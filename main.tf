@@ -2,12 +2,12 @@
 module "naming" {
   source  = "Azure/naming/azurerm"
   version = "0.4.1"
-  suffix  = ["mmu-demo"]
+  suffix  = ["mmu","demo"]
 }
 
 # Create resource group using AVM module
 module "resourcegroup" {
-  source  = "Azure/avm-res-resources-resourcegroup/azurerm"
+  source  = "Azure/resourcegroup/azurerm"
   version = "0.1.0"
   # insert the 2 required variables here
   location = var.location
@@ -19,7 +19,7 @@ module "vnet" {
   source              = "Azure/avm-res-network-virtualnetwork/azurerm"
   version             = "0.4.0"
   name                = module.naming.virtual_network.name_unique
-  resource_group_name = module.avm-res-resources-resourcegroup.name
+  resource_group_name = module.resourcegroup.name
   location            = var.location
   address_space       = var.vnet_address_spaces
   tags                = var.tags
@@ -28,7 +28,7 @@ module "vnet" {
 resource "azurerm_subnet" "defaults" {
   for_each             = var.subnet_address_spaces
   name                 = each.value.name
-  resource_group_name  = module.avm-res-resources-resourcegroup.name
+  resource_group_name  = module.resourcegroup.name
   virtual_network_name = module.vnet.name
   address_prefixes     = each.value.address_prefixes
 }
@@ -37,7 +37,7 @@ module "networksecuritygroup" {
   source  = "Azure/avm-res-network-networksecuritygroup/azurerm"
   version = "0.2.0"
   # insert the 3 required variables here
-  resource_group_name = module.avm-res-resources-resourcegroup.name
+  resource_group_name = module.resourcegroup.name
   location            = var.location
   name                = module.naming.network_security_group.name_unique
   tags                = var.tags
