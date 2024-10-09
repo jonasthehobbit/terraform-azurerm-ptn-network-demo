@@ -13,7 +13,6 @@ subnet_address_spaces = {
 tags = {
   costcode    = "123456"
   owner       = "terraform"
-  environment = "dev"
 }
 network_security_group_rules = {
   default_deny = {
