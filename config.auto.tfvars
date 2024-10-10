@@ -56,8 +56,8 @@ network_security_group_rules = {
     direction                    = "Inbound"
     access                       = "Allow"
     protocol                     = "*"
-    source_port_ranges            = ["22","3389"]
-    destination_port_ranges       = "*"
+    source_port_ranges           = "*"
+    destination_port_ranges      = ["22", "3389"]
     source_address_prefixes      = ["*"]
     destination_address_prefixes = ["*"]
   }
