@@ -46,7 +46,7 @@ network_security_group_rules = {
     access                     = "Allow"
     protocol                   = "*"
     source_port_range          = "*"
-    destination_port_ranges    = ["22", "3389"]
+    destination_port_ranges    = [22, 3389]
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
@@ -68,7 +68,7 @@ network_security_group_rules = {
     access                       = "Allow"
     protocol                     = "*"
     source_port_range            = "*"
-    destination_port_ranges      = ["22", "3389"]
+    destination_port_ranges      = [22, 3389]
     source_address_prefixes      = ["10.10.10.10", "10.10.10.11"]
     destination_address_prefixes = ["10.10.10.12", "10.10.10.13"]
   }
