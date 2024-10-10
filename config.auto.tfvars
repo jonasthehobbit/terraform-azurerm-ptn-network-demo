@@ -28,4 +28,37 @@ network_security_group_rules = {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+  allow_risk1 = {
+    name                       = "allow_risk1"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+  allow_risk2 = {
+    name                         = "allow_risk2"
+    priority                     = 200
+    direction                    = "Inbound"
+    access                       = "Allow"
+    protocol                     = "*"
+    source_port_range            = "*"
+    destination_port_range       = "*"
+    source_address_prefixes      = ["*"]
+    destination_address_prefixes = ["*"]
+  }
+  allow_risk3 = {
+    name                         = "allow_risk3"
+    priority                     = 300
+    direction                    = "Inbound"
+    access                       = "Allow"
+    protocol                     = "*"
+    source_port_ranges            = ["22","3389"]
+    destination_port_ranges       = "*"
+    source_address_prefixes      = ["*"]
+    destination_address_prefixes = ["*"]
+  }
 }

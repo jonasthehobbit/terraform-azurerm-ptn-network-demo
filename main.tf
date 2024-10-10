@@ -31,6 +31,7 @@ resource "azurerm_subnet" "defaults" {
   resource_group_name  = module.resourcegroup.name
   virtual_network_name = module.vnet.name
   address_prefixes     = each.value.address_prefixes
+  
 }
 # Create a default NSG using AVM module
 module "networksecuritygroup" {
