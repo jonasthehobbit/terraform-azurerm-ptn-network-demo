@@ -39,26 +39,37 @@ network_security_group_rules = {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-  allow_risk2 = {
-    name                         = "allow_risk2"
+    allow_risk2 = {
+    name                         = "allow_norisk1"
     priority                     = 200
     direction                    = "Inbound"
     access                       = "Allow"
     protocol                     = "*"
     source_port_range            = "*"
     destination_port_range       = "*"
-    source_address_prefixes      = ["*"]
-    destination_address_prefixes = ["*"]
+    source_address_prefixes      = ["10.10.10.10", "10.10.10.11"]
+    destination_address_prefixes = ["10.10.10.13", "10.10.10.14"]
   }
-  allow_risk3 = {
-    name                         = "allow_risk3"
-    priority                     = 300
+  allow_norisk1 = {
+    name                         = "allow_norisk1"
+    priority                     = 500
+    direction                    = "Inbound"
+    access                       = "Allow"
+    protocol                     = "*"
+    source_port_range            = "*"
+    destination_port_range       = "*"
+    source_address_prefixes      = ["10.10.10.10", "10.10.10.11"]
+    destination_address_prefixes = ["10.10.10.13", "10.10.10.14"]
+  }
+  allow_norisk2 = {
+    name                         = "allow_norisk2"
+    priority                     = 600
     direction                    = "Inbound"
     access                       = "Allow"
     protocol                     = "*"
     source_port_range           = "*"
     destination_port_ranges      = ["22", "3389"]
-    source_address_prefixes      = ["*"]
-    destination_address_prefixes = ["*"]
+    source_address_prefixes      = ["10.10.10.10", "10.10.10.11"]
+    destination_address_prefixes = ["10.10.10.12", "10.10.10.13"]
   }
 }
