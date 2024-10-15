@@ -46,7 +46,18 @@ network_security_group_rules = {
     access                     = "Allow"
     protocol                   = "*"
     source_port_range          = "*"
-    destination_port_ranges    = [22, 3389]
+    destination_port_ranges    = [3389]
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+  allow_risk3 = {
+    name                       = "allow_risk3"
+    priority                   = 300
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_ranges    = [22]
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
