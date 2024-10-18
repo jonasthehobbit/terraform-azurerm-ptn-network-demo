@@ -17,11 +17,6 @@ variable "subnet_address_spaces" {
 variable "tags" {
   description = "A map of tags to add to all resources in this example."
   type        = map(string)
-  default = {
-    costcode    = "123456"
-    owner       = "terraform"
-    environment = "dev"
-  }
 }
 variable "network_security_group_rules" {
   description = "A map of network security group rules to create."
