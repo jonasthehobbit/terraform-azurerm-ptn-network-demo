@@ -11,8 +11,8 @@ subnet_address_spaces = {
   }
 }
 tags = {
-  costcode    = "123456"
-  owner       = "terraform"
+  # costcode    = "123456"
+  # owner       = "terraform"
   environment = "dev"
   test        = "some_tag"
 }
