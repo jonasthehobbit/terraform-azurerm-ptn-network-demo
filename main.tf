@@ -2,9 +2,8 @@
 module "naming" {
   source  = "Azure/naming/azurerm"
   version = "0.4.1"
-  suffix  = ["mmu","demo"]
+  suffix  = ["mmu", "demo"]
 }
-
 # Create resource group using AVM module
 module "resourcegroup" {
   source  = "Azure/avm-res-resources-resourcegroup/azurerm"
@@ -31,7 +30,7 @@ resource "azurerm_subnet" "defaults" {
   resource_group_name  = module.resourcegroup.name
   virtual_network_name = module.vnet.name
   address_prefixes     = each.value.address_prefixes
-  
+
 }
 # Create a default NSG using AVM module
 module "networksecuritygroup" {
